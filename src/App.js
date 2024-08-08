@@ -4,18 +4,19 @@ function App() {
   return (
     <div>
       <header>
-        <img src={logo}  alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+       <img src='logo192.png' alt='sample'/>little lemon
       </header>
+      <nav>
+        <ul>
+nothing
+        </ul>
+        <li> <a href="mailto:someone@example.com">
+          email test</a> </li>
+      </nav>
+      <main></main>
+      <footer>
+        <p>Social Media Links</p>
+      </footer>
     </div>
   );
 }
