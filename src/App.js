@@ -1,21 +1,21 @@
 import './App.css';
+import React from 'react';
+import Header from './Header';
+import Nav from './Nav';
 
 function App() {
   return (
     <div>
-      <header>
-       <img src='logo192.png' alt='sample'/>little lemon
-      </header>
-      <nav>
-        <ul>
-nothing
-        </ul>
-        <li> <a href="mailto:someone@example.com">
-          email test</a> </li>
-      </nav>
-      <main></main>
+      <Header
+      title ="Little Lemon"
+      logo = "public\Logo.svg">
+      </Header>
+      <Nav />
+      <main>
+
+      </main>
       <footer>
-        <p>Social Media Links</p>
+       
       </footer>
     </div>
   );
