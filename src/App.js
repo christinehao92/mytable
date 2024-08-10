@@ -1,24 +1,22 @@
 import './App.css';
 import React from 'react';
-import Header from './components/Header'; // Corrected import path
-import Nav from './components/Nav';       // Corrected import path
-import HeroSection from './components/Hero';
-import InfoCards from './components/InfoCards';
-import Footer from './components/Footer';
+import {Header} from './components/Header'; // No need for '.js' extension
+import Nav from './components/Nav';
+import HeroSection from './components/Hero'; // Ensure correct file name
+import InfoCards from './components/Infocards'; // Ensure correct file name
 
 function App() {
   return (
-    <div>
-      <Header
-        title="Little Lemon"
-        logo="public/Logo.svg"
-      />
-      <Nav />
-      <main>
-        <HeroSection />
-        <InfoCards />
-      </main>
-      <Footer />
+    <div className="app">
+      <Header  
+        className="header"
+        title="Little Lemon" 
+        logo="/Logo.svg" />
+      <Nav/>
+         <main className="main-content">
+        <HeroSection/>
+        <InfoCards/>
+       </main> 
     </div>
   );
 }

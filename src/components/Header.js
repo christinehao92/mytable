@@ -1,16 +1,12 @@
 import React from 'react';
 
-
-function Header({ title, logo, children }) {
+export function Header({ title, logo }) {
   return (
     <header className="app-header">
       <div className="header-content">
-        {logo && <img src='/Logo.svg' alt={`${title} logo`} className="header-logo" />}
-        {title && <h1 className="header-title">Little Lemon</h1>}
-        {children && <div className="header-children">{children}</div>}
+        {logo && <img src={logo} alt={`${title} logo`} className="header-logo" />}
+        {title && <h1 className="header-title">{title}</h1>}
       </div>
     </header>
   );
 }
-
-export default Header;
