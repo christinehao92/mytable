@@ -4,10 +4,10 @@ import { Button } from '@chakra-ui/react';
 function HeroSection() {
   return (
     <section className="hero">
-      <img src="/hero-image.jpg" alt="Hero" className="hero-image" />
+      <img src="/restaurant chef B.jpg" alt="Hero" className="hero-image" />
       <div className="hero-content">
         <h2>Welcome to Little Lemon</h2>
-        <p>Enjoy the best dining experience in town.</p>
+        <p>With a deep commitment to quality and a warm, welcoming atmosphere, we pride ourselves on serving delicious, home-style meals that bring people together. Whether you're here for a quick bite or a special occasion, Little Lemon promises a delightful dining experience that will make you feel right at home.</p>
         <Button colorScheme="yellow" size="lg">
           Make a Reservation
         </Button>

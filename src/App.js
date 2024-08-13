@@ -4,19 +4,22 @@ import {Header} from './components/Header'; // No need for '.js' extension
 import Nav from './components/Nav';
 import HeroSection from './components/Hero'; // Ensure correct file name
 import InfoCards from './components/Infocards'; // Ensure correct file name
+import {FooterLink} from './components/Footer';
 
 function App() {
   return (
     <div className="app">
-      <Header  
+      <Header
         className="header"
-        title="Little Lemon" 
-        logo="/Logo.svg" />
+        title=""
+        logo="/Logo.svg" 
+        />
       <Nav/>
          <main className="main-content">
         <HeroSection/>
         <InfoCards/>
-       </main> 
+       </main>
+       <FooterLink/>
     </div>
   );
 }
