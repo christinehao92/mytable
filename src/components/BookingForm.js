@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { Button } from '@chakra-ui/react';
 
-export function ReservationForm() {
-  // Step 2: Define state variables
+
+
+
+export function ReservationForm({onSubmitSuccess}) {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [guests, setGuests] = useState(1);
@@ -9,34 +12,79 @@ export function ReservationForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [error, setError] = useState(null);
+  const [confirmationMessage, setConfirmationMessage] = useState('');
 
-  // Step 3: Define available times
-  const [availableTimes, setAvailableTimes] = useState([
-    '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'
-  ]);
+  const submitAPI = async function(formData) {
+    try {
+      const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const result = await response.json();
 
-  // Step 4: Handle form submission (for future API communication)
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Implement API communication or other actions here
-    console.log({ date, time, guests, occasion });
+      console.log(result)
+      return result; // Adjust based on your API response structure
+    } catch (error) {
+      console.error('API request failed:', error);
+      return false;
+    }
   };
 
-  const handleDateChange = (e) => {
-    const selectedDate = e.target.value;
-    setDate(selectedDate);
 
-    // Example: Update available times based on the selected date
-    if (selectedDate === '2024-08-15') {
-      setAvailableTimes(['18:00', '19:00', '20:00']); // Special times for this date
-    } else {
-      setAvailableTimes(['17:00', '18:00', '19:00', '20:00', '21:00', '22:00']); // Default times
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+
+    const formData = {
+      date,
+      time,
+      guests,
+      occasion,
+      name,
+      email,
+      phone,
+    };
+
+    console.log('Submitted Data:', formData);
+
+    try {
+      const result = await submitAPI(formData);
+      console.log(result)
+      
+      if (result && result.id) {
+        setConfirmationMessage('Your reservation has been confirmed!');
+        setError(null); // Clear any previous errors
+        onSubmitSuccess();
+        setDate('');
+        setTime('');
+        setGuests(1);
+        setOccasion('Birthday');
+        setName('');
+        setEmail('');
+        setPhone('');
+      } else {
+        alert('Reservation failed. Please try agian.');
+      }
+    } catch (err) {
+      console.error('Failed to submit reservation:', err);
+      setError('Failed to submit reservation. Please check the console for more details.');
     }
   };
 
   return (
     <form onSubmit={handleSubmit} style={{ display: 'grid', maxWidth: '200px', gap: '20px' }}>
       
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {confirmationMessage && <p style={{ color: 'green' }}>{confirmationMessage}</p>}
       <label htmlFor="res-name">Name</label>
       <input
         type="text"
@@ -63,6 +111,7 @@ export function ReservationForm() {
         onChange={(e) => setPhone(e.target.value)}
         required
       />
+
       <label htmlFor="res-date">Choose date</label>
       <input
         type="date"
@@ -77,7 +126,7 @@ export function ReservationForm() {
         value={time}
         onChange={(e) => setTime(e.target.value)}
       >
-        {availableTimes.map((timeOption, index) => (
+        {['17:00', '18:00', '19:00', '20:00', '21:00', '22:00'].map((timeOption, index) => (
           <option key={index} value={timeOption}>
             {timeOption}
           </option>
@@ -103,9 +152,10 @@ export function ReservationForm() {
       >
         <option value="Birthday">Birthday</option>
         <option value="Anniversary">Anniversary</option>
-        <option value="Hangout">Anniversary</option>
+        <option value="Hangout">Hangout</option>
       </select>
 
+      <Button type="submit" colorScheme="blue">Submit</Button>
     </form>
   );
 }
